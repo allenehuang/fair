@@ -80,10 +80,11 @@ class CarProviderSectionHeader: UIView {
 
         carCountContainer.numberOfCarsLabel.text = "\(result.cars.count)"
 
-        guard let providerCoordinates = result.location?.coordinate else { return }
-        let providerLocation = CLLocation(latitude: providerCoordinates.latitude, longitude: providerCoordinates.longitude)
-        let currentLocation = CLLocation(latitude: LocationService.shared.currentLocation.latitude, longitude: LocationService.shared.currentLocation.longitude)
-        let distance = providerLocation.distance(from: currentLocation)
+        guard let distance = result.location?.distance else { return }
+//        guard let providerCoordinates = result.location?.coordinate else { return }
+//        let providerLocation = CLLocation(latitude: providerCoordinates.latitude, longitude: providerCoordinates.longitude)
+//        let currentLocation = CLLocation(latitude: LocationService.shared.currentLocation.latitude, longitude: LocationService.shared.currentLocation.longitude)
+//        let distance = providerLocation.distance(from: currentLocation)
         providerDistanceLabel.text = LocationService.shared.getDistanceString(distance)
     }
 

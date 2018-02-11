@@ -48,12 +48,7 @@ class ProviderResultsViewController: UIViewController {
     }
 
     @objc private func didTapSortButton(_ button: UIBarButtonItem) {
-//        resultsViewModel.sortPrice(sort: .asc) { [weak self] in
-//            self?.tableView.reloadData()
-//        }
-//        resultsViewModel.sortDistance(sort: .desc) { [weak self] in
-//            self?.tableView.reloadData()
-//        }
+
     }
 
     required init?(coder aDecoder: NSCoder) {

@@ -43,6 +43,9 @@ class ProviderResultsViewModel: NSObject {
                 return distance0 < distance1
             }
         })
+        DispatchQueue.main.async {
+            completion()
+        }
     }
 
     func sortCompanyName(sort: SortType, completion: @escaping ()->()) {
@@ -53,5 +56,8 @@ class ProviderResultsViewModel: NSObject {
                 return $0.provider.companyName < $1.provider.companyName
             }
         })
+        DispatchQueue.main.async {
+            completion()
+        }
     }
 }
