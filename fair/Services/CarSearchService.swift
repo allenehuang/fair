@@ -49,8 +49,12 @@ class CarSearchService {
                      */
                     // if status is 200 else show the message
                     let decoder = JSONDecoder()
-                    let results = try decoder.decode(RentalCarSearchResults.self, from: data)
+                    var results = try decoder.decode(RentalCarSearchResults.self, from: data)
                     DispatchQueue.main.async {
+                        for index in results.results.indices {
+                            guard let resultCoordinate = results.results[index].location?.coordinate else { return }
+                            results.results[index].location?.distance = CLLocation(latitude: location.latitude, longitude: location.longitude).distance(from: CLLocation(latitude: resultCoordinate.latitude, longitude: resultCoordinate.longitude))
+                        }
                         completion(results.results, nil)
                     }
                 } catch let error as NSError {

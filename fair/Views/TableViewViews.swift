@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import CoreLocation
 
-class CarProviderTableViewCell: UITableViewCell {
+class CarProviderSectionHeader: UIView {
     let providerNameLabel = UILabel()
     let providerAddressLabel = UILabel()
     let providerRegionLabel = UILabel()
@@ -19,15 +19,13 @@ class CarProviderTableViewCell: UITableViewCell {
     let carCountContainer = CarCountContainer()
     var didUpdateConstraints = false
 
-    static let reuseIdentifierString = "CarProviderCell"
-
     convenience init() {
-        self.init(style: .default, reuseIdentifier: CarProviderTableViewCell.reuseIdentifierString)
+        self.init(frame: .zero)
     }
 
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        contentView.addSubviewsForAutolayout(labelContainer, carCountContainer, providerDistanceLabel)
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        addSubviewsForAutolayout(labelContainer, carCountContainer, providerDistanceLabel)
         providerNameLabel.font = UIFont.systemFont(ofSize: 15.0, weight: .bold)
         providerAddressLabel.font = UIFont.systemFont(ofSize: 12.0, weight: .regular)
         providerRegionLabel.font = UIFont.systemFont(ofSize: 12.0, weight: .regular)
@@ -57,7 +55,7 @@ class CarProviderTableViewCell: UITableViewCell {
             "distanceLabel": providerDistanceLabel
         ]
 
-        contentView.addConstraints(
+        addConstraints(
             NSLayoutConstraint.constraints(withVisualFormat: "V:|-5-[labelContainer]-5-|", options: [], metrics: nil, views: views),
             NSLayoutConstraint.constraints(withVisualFormat: "V:|-5-[carCountContainer]-5-|", options: [], metrics: nil, views: views),
             NSLayoutConstraint.constraints(withVisualFormat: "V:|-5-[distanceLabel]-5-|", options: [], metrics: nil, views: views),
@@ -124,6 +122,88 @@ class CarCountContainer: UIView {
             NSLayoutConstraint.constraints(withVisualFormat: "H:|[countLabel]|", options: [], metrics: nil, views: views),
             NSLayoutConstraint.constraints(withVisualFormat: "V:|-(>=5)-[descriptionLabel][countLabel]-(>=5)-|", options: [], metrics: nil, views: views)
         )
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+class CarTableViewCell: UITableViewCell {
+    static let reuseIdentifierString = "carCell"
+    private let labelContainer = UIView()
+    private let acrissCodeLabel = UILabel()
+    private let transmissionLabel = UILabel()
+    private let categoryLabel = UILabel()
+    private let pricingContainer = UIView()
+    private let pricingDescriptionLabel = UILabel()
+    private let totalLabel = UILabel()
+
+    convenience init() {
+        self.init(style: .default, reuseIdentifier: CarTableViewCell.reuseIdentifierString)
+    }
+
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: .default, reuseIdentifier: reuseIdentifier)
+        acrissCodeLabel.font = UIFont.systemFont(ofSize: 15.0, weight: .bold)
+        transmissionLabel.font = UIFont.systemFont(ofSize: 12.0, weight: .regular)
+        categoryLabel.font = UIFont.systemFont(ofSize: 12.0, weight: .regular)
+        pricingDescriptionLabel.font = UIFont.systemFont(ofSize: 12.0, weight: .regular)
+        totalLabel.font = UIFont.systemFont(ofSize: 12.0, weight: .regular)
+
+        contentView.addSubviewsForAutolayout(labelContainer, pricingContainer)
+        labelContainer.addSubviewsForAutolayout(acrissCodeLabel, transmissionLabel, categoryLabel)
+        pricingContainer.addSubviewsForAutolayout(pricingDescriptionLabel, totalLabel)
+        layoutViews()
+    }
+
+    func layoutViews() {
+        let metrics: [String: Any] = [
+            "spacing": 5
+        ]
+
+        let labelViews: [String: Any] = [
+            "acrissCodeLabel": acrissCodeLabel,
+            "transmissionLabel": transmissionLabel,
+            "categoryLabel": categoryLabel
+        ]
+
+        labelContainer.addConstraints(
+            NSLayoutConstraint.constraints(withVisualFormat: "V:|[acrissCodeLabel][transmissionLabel][categoryLabel]|", options: [], metrics: metrics, views: labelViews),
+            NSLayoutConstraint.constraints(withVisualFormat: "H:|[acrissCodeLabel]|", options: [], metrics: metrics, views: labelViews),
+            NSLayoutConstraint.constraints(withVisualFormat: "H:|[transmissionLabel]|", options: [], metrics: metrics, views: labelViews),
+            NSLayoutConstraint.constraints(withVisualFormat: "H:|[categoryLabel]|", options: [], metrics: metrics, views: labelViews)
+        )
+
+        let pricingViews: [String: Any] = [
+            "rateLabel": pricingDescriptionLabel,
+            "totalLabel": totalLabel
+        ]
+
+        pricingContainer.addConstraints(
+            NSLayoutConstraint.constraints(withVisualFormat: "H:|[rateLabel]-spacing-[totalLabel]|", options: [], metrics: metrics, views: pricingViews),
+            NSLayoutConstraint.constraints(withVisualFormat: "V:|[totalLabel]|", options: [], metrics: metrics, views: pricingViews),
+            NSLayoutConstraint.constraints(withVisualFormat: "V:|[rateLabel]|", options: [], metrics: metrics, views: pricingViews)
+        )
+
+        let views: [String: Any] = [
+            "labelContainer": labelContainer,
+            "pricingContainer": pricingContainer
+        ]
+
+        contentView.addConstraints(
+            NSLayoutConstraint.constraints(withVisualFormat: "H:|-spacing-[labelContainer]-(>=spacing)-[pricingContainer]-|", options: [], metrics: metrics, views: views),
+            NSLayoutConstraint.constraints(withVisualFormat: "V:|-spacing-[labelContainer]-spacing-|", options: [], metrics: metrics, views: views),
+            NSLayoutConstraint.constraints(withVisualFormat: "V:|-spacing-[pricingContainer]-spacing-|", options: [], metrics: metrics, views: views)
+        )
+    }
+
+    func configureWith(car: Car) {
+        acrissCodeLabel.text = car.vehicleInfo.acrissCode
+        transmissionLabel.text = car.vehicleInfo.transmission
+        categoryLabel.text = car.vehicleInfo.category
+        totalLabel.text = car.estimatedTotal?.amount
+        pricingDescriptionLabel.text = NSLocalizedString("Estimated Total:", comment: "estimated total string")
     }
 
     required init?(coder aDecoder: NSCoder) {

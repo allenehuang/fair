@@ -10,8 +10,8 @@ import Foundation
 import UIKit
 
 class ProviderResultsViewController: UIViewController {
-    let tableView = UITableView(frame: .zero, style: .plain)
-    let resultsViewModel = ProviderResultsViewModel()
+    private let tableView = UITableView(frame: .zero, style: .grouped)
+    private let resultsViewModel = ProviderResultsViewModel()
 
     init(results: [Result]) {
         super.init(nibName: nil, bundle: nil)
@@ -21,6 +21,14 @@ class ProviderResultsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
+        tableView.delegate = self
+        tableView.estimatedRowHeight = 60.0
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedSectionHeaderHeight = 60.0
+        tableView.sectionHeaderHeight = UITableViewAutomaticDimension
+        tableView.estimatedSectionFooterHeight = 0.0
+        tableView.sectionFooterHeight = 0.0
+
         view.addSubviewsForAutolayout(tableView)
         layoutViews()
 
@@ -40,7 +48,12 @@ class ProviderResultsViewController: UIViewController {
     }
 
     @objc private func didTapSortButton(_ button: UIBarButtonItem) {
-
+//        resultsViewModel.sortPrice(sort: .asc) { [weak self] in
+//            self?.tableView.reloadData()
+//        }
+//        resultsViewModel.sortDistance(sort: .desc) { [weak self] in
+//            self?.tableView.reloadData()
+//        }
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -50,15 +63,29 @@ class ProviderResultsViewController: UIViewController {
 
 extension ProviderResultsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        let result = resultsViewModel.results[section]
+        return result.cars.count
+    }
+
+    func numberOfSections(in tableView: UITableView) -> Int {
         return resultsViewModel.results.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCell(withIdentifier: CarProviderTableViewCell.reuseIdentifierString) as? CarProviderTableViewCell
+        var cell = tableView.dequeueReusableCell(withIdentifier: CarTableViewCell.reuseIdentifierString) as? CarTableViewCell
         if cell == nil {
-            cell = CarProviderTableViewCell()
+            cell = CarTableViewCell()
         }
-        cell?.configureWith(result: resultsViewModel.results[indexPath.row])
+        let car = resultsViewModel.results[indexPath.section].cars[indexPath.row]
+        cell?.configureWith(car: car)
         return cell!
+    }
+}
+
+extension ProviderResultsViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = CarProviderSectionHeader()
+        headerView.configureWith(result: resultsViewModel.results[section])
+        return headerView
     }
 }

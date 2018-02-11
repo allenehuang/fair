@@ -16,14 +16,12 @@
 		597FF657202F483400637E25 /* UIView+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 597FF656202F483400637E25 /* UIView+Helper.swift */; };
 		597FF65A202F505000637E25 /* CarRentalMapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 597FF659202F505000637E25 /* CarRentalMapViewModel.swift */; };
 		597FF65C202F593700637E25 /* DatePickerContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 597FF65B202F593700637E25 /* DatePickerContainerView.swift */; };
-		597FF6612030962800637E25 /* TableViewCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 597FF6602030962800637E25 /* TableViewCells.swift */; };
+		597FF6612030962800637E25 /* TableViewViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 597FF6602030962800637E25 /* TableViewViews.swift */; };
 		597FF6632030985300637E25 /* nevada.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 597FF6622030985300637E25 /* nevada.gpx */; };
 		597FF6652030D98000637E25 /* ProviderResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 597FF6642030D98000637E25 /* ProviderResultsViewController.swift */; };
 		597FF6672030D9EF00637E25 /* ProviderResultsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 597FF6662030D9EF00637E25 /* ProviderResultsViewModel.swift */; };
 		597FF66A2030E28000637E25 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 597FF6692030E28000637E25 /* LocationService.swift */; };
-		597FF66C2030E9C200637E25 /* CarResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 597FF66B2030E9C200637E25 /* CarResultsViewController.swift */; };
 		59E540142029573100663572 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E540132029573100663572 /* AppDelegate.swift */; };
-		59E540162029573100663572 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E540152029573100663572 /* ViewController.swift */; };
 		59E5401B2029573100663572 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 59E5401A2029573100663572 /* Assets.xcassets */; };
 		59E5401E2029573100663572 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 59E5401C2029573100663572 /* LaunchScreen.storyboard */; };
 		59E540292029573100663572 /* fairTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E540282029573100663572 /* fairTests.swift */; };
@@ -49,15 +47,13 @@
 		597FF656202F483400637E25 /* UIView+Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Helper.swift"; sourceTree = "<group>"; };
 		597FF659202F505000637E25 /* CarRentalMapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarRentalMapViewModel.swift; sourceTree = "<group>"; };
 		597FF65B202F593700637E25 /* DatePickerContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerContainerView.swift; sourceTree = "<group>"; };
-		597FF6602030962800637E25 /* TableViewCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCells.swift; sourceTree = "<group>"; };
+		597FF6602030962800637E25 /* TableViewViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewViews.swift; sourceTree = "<group>"; };
 		597FF6622030985300637E25 /* nevada.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = nevada.gpx; sourceTree = "<group>"; };
 		597FF6642030D98000637E25 /* ProviderResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderResultsViewController.swift; sourceTree = "<group>"; };
 		597FF6662030D9EF00637E25 /* ProviderResultsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderResultsViewModel.swift; sourceTree = "<group>"; };
 		597FF6692030E28000637E25 /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
-		597FF66B2030E9C200637E25 /* CarResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarResultsViewController.swift; sourceTree = "<group>"; };
 		59E540102029573100663572 /* fair.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = fair.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		59E540132029573100663572 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		59E540152029573100663572 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		59E5401A2029573100663572 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		59E5401D2029573100663572 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		59E5401F2029573100663572 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -87,11 +83,9 @@
 		597FF64D202E8F6F00637E25 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				59E540152029573100663572 /* ViewController.swift */,
 				597FF649202E8C3300637E25 /* ProviderDetailViewController.swift */,
 				597FF64B202E8F2300637E25 /* CarRentalMapViewController.swift */,
 				597FF6642030D98000637E25 /* ProviderResultsViewController.swift */,
-				597FF66B2030E9C200637E25 /* CarResultsViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -118,7 +112,7 @@
 			children = (
 				597FF653202F455F00637E25 /* SearchViews.swift */,
 				597FF65B202F593700637E25 /* DatePickerContainerView.swift */,
-				597FF6602030962800637E25 /* TableViewCells.swift */,
+				597FF6602030962800637E25 /* TableViewViews.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -293,14 +287,12 @@
 				597FF66A2030E28000637E25 /* LocationService.swift in Sources */,
 				597FF6672030D9EF00637E25 /* ProviderResultsViewModel.swift in Sources */,
 				597FF645202E4EBC00637E25 /* CarSearchService.swift in Sources */,
-				597FF6612030962800637E25 /* TableViewCells.swift in Sources */,
-				59E540162029573100663572 /* ViewController.swift in Sources */,
+				597FF6612030962800637E25 /* TableViewViews.swift in Sources */,
 				597FF65C202F593700637E25 /* DatePickerContainerView.swift in Sources */,
 				597FF654202F455F00637E25 /* SearchViews.swift in Sources */,
 				597FF64A202E8C3300637E25 /* ProviderDetailViewController.swift in Sources */,
 				597FF6652030D98000637E25 /* ProviderResultsViewController.swift in Sources */,
 				59E540142029573100663572 /* AppDelegate.swift in Sources */,
-				597FF66C2030E9C200637E25 /* CarResultsViewController.swift in Sources */,
 				597FF648202E68C100637E25 /* Models.swift in Sources */,
 				597FF657202F483400637E25 /* UIView+Helper.swift in Sources */,
 				597FF65A202F505000637E25 /* CarRentalMapViewModel.swift in Sources */,

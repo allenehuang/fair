@@ -10,15 +10,15 @@ import Foundation
 import CoreLocation
 
 struct RentalCarSearchResults: Codable {
-    let results: [Result]
+    var results: [Result]
 }
 
 struct Result: Codable {
     let provider: Provider
     let branchID: String
-    let location: Location?
+    var location: Location?
     let address: Address
-    let cars: [Car]
+    var cars: [Car]
 
     enum CodingKeys: String, CodingKey {
         case provider
@@ -42,6 +42,7 @@ struct Provider: Codable {
 struct Location: Codable {
     let latitude: Double
     let longitude: Double
+    var distance: CLLocationDistance?
     var coordinate: CLLocationCoordinate2D {
         return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
     }
