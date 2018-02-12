@@ -97,6 +97,13 @@ extension ProviderResultsViewController: UITableViewDelegate {
         headerView.configureWith(result: resultsViewModel.results[section])
         return headerView
     }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let result = resultsViewModel.results[indexPath.section]
+        let car = result.cars[indexPath.row]
+        let carDetailViewController = CarDetailViewController(result: result, car: car)
+        navigationController?.pushViewController(carDetailViewController, animated: true)
+    }
 }
 
 extension ProviderResultsViewController: SortPickerViewDelegate {
