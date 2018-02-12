@@ -8,11 +8,6 @@
 
 import Foundation
 
-enum SortType {
-    case asc
-    case desc
-}
-
 class ProviderResultsViewModel: NSObject {
     var results = [Result]()
     let sortButtonString = NSLocalizedString("Sort", comment: "sort button string")

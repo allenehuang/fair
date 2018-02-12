@@ -21,7 +21,8 @@
 		597FF6652030D98000637E25 /* ProviderResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 597FF6642030D98000637E25 /* ProviderResultsViewController.swift */; };
 		597FF6672030D9EF00637E25 /* ProviderResultsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 597FF6662030D9EF00637E25 /* ProviderResultsViewModel.swift */; };
 		597FF66A2030E28000637E25 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 597FF6692030E28000637E25 /* LocationService.swift */; };
-		597FF66E20310B9E00637E25 /* ResultsViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 597FF66D20310B9E00637E25 /* ResultsViews.swift */; };
+		597FF66E20310B9E00637E25 /* SortPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 597FF66D20310B9E00637E25 /* SortPickerView.swift */; };
+		597FF6702031171A00637E25 /* DetailViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 597FF66F2031171A00637E25 /* DetailViews.swift */; };
 		59E540142029573100663572 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E540132029573100663572 /* AppDelegate.swift */; };
 		59E5401B2029573100663572 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 59E5401A2029573100663572 /* Assets.xcassets */; };
 		59E5401E2029573100663572 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 59E5401C2029573100663572 /* LaunchScreen.storyboard */; };
@@ -53,7 +54,8 @@
 		597FF6642030D98000637E25 /* ProviderResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderResultsViewController.swift; sourceTree = "<group>"; };
 		597FF6662030D9EF00637E25 /* ProviderResultsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderResultsViewModel.swift; sourceTree = "<group>"; };
 		597FF6692030E28000637E25 /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
-		597FF66D20310B9E00637E25 /* ResultsViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsViews.swift; sourceTree = "<group>"; };
+		597FF66D20310B9E00637E25 /* SortPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortPickerView.swift; sourceTree = "<group>"; };
+		597FF66F2031171A00637E25 /* DetailViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViews.swift; sourceTree = "<group>"; };
 		59E540102029573100663572 /* fair.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = fair.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		59E540132029573100663572 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		59E5401A2029573100663572 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -115,7 +117,8 @@
 				597FF653202F455F00637E25 /* SearchViews.swift */,
 				597FF65B202F593700637E25 /* DatePickerContainerView.swift */,
 				597FF6602030962800637E25 /* TableViewViews.swift */,
-				597FF66D20310B9E00637E25 /* ResultsViews.swift */,
+				597FF66D20310B9E00637E25 /* SortPickerView.swift */,
+				597FF66F2031171A00637E25 /* DetailViews.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -293,6 +296,7 @@
 				597FF6612030962800637E25 /* TableViewViews.swift in Sources */,
 				597FF65C202F593700637E25 /* DatePickerContainerView.swift in Sources */,
 				597FF654202F455F00637E25 /* SearchViews.swift in Sources */,
+				597FF6702031171A00637E25 /* DetailViews.swift in Sources */,
 				597FF64A202E8C3300637E25 /* ProviderDetailViewController.swift in Sources */,
 				597FF6652030D98000637E25 /* ProviderResultsViewController.swift in Sources */,
 				59E540142029573100663572 /* AppDelegate.swift in Sources */,
@@ -300,7 +304,7 @@
 				597FF657202F483400637E25 /* UIView+Helper.swift in Sources */,
 				597FF65A202F505000637E25 /* CarRentalMapViewModel.swift in Sources */,
 				597FF64C202E8F2300637E25 /* CarRentalMapViewController.swift in Sources */,
-				597FF66E20310B9E00637E25 /* ResultsViews.swift in Sources */,
+				597FF66E20310B9E00637E25 /* SortPickerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

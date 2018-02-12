@@ -104,29 +104,3 @@ class DateLabel: UILabel {
         fatalError("init(coder:) has not been implemented")
     }
 }
-
-enum DatePickerType {
-    case dropoff
-    case pickup
-}
-
-class DatePicker: UIDatePicker {
-    var type: DatePickerType?
-    
-    convenience init() {
-        self.init(frame: .zero)
-    }
-
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        timeZone = NSTimeZone.local
-        datePickerMode = .date
-        minimumDate = Date()
-        backgroundColor = .white
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-}
-

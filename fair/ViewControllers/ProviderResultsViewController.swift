@@ -12,6 +12,7 @@ import UIKit
 class ProviderResultsViewController: UIViewController {
     private let tableView = UITableView(frame: .zero, style: .grouped)
     private let resultsViewModel = ProviderResultsViewModel()
+    private let sortPickerView = SortPickerView()
 
     init(results: [Result]) {
         super.init(nibName: nil, bundle: nil)
@@ -20,6 +21,7 @@ class ProviderResultsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        sortPickerView.delegate = self
         tableView.dataSource = self
         tableView.delegate = self
         tableView.estimatedRowHeight = 60.0
@@ -45,10 +47,22 @@ class ProviderResultsViewController: UIViewController {
             NSLayoutConstraint.constraints(withVisualFormat: "H:|[tableView]|", options: [], metrics: nil, views: views),
             NSLayoutConstraint.constraints(withVisualFormat: "V:|[tableView]|", options: [], metrics: nil, views: views)
         )
+
+        guard let navigationControllerView = navigationController?.view else { return }
+
+        let navigationViews: [String: Any] = [
+            "sortPickerView": sortPickerView
+        ]
+        navigationControllerView.addSubviewsForAutolayout(sortPickerView)
+
+        navigationControllerView.addConstraints(
+            NSLayoutConstraint.constraints(withVisualFormat: "H:|[sortPickerView]|", options: [], metrics: nil, views: navigationViews),
+            NSLayoutConstraint.constraints(withVisualFormat: "V:|[sortPickerView]|", options: [], metrics: nil, views: navigationViews)
+        )
     }
 
     @objc private func didTapSortButton(_ button: UIBarButtonItem) {
-
+        sortPickerView.showView(true)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -82,5 +96,24 @@ extension ProviderResultsViewController: UITableViewDelegate {
         let headerView = CarProviderSectionHeader()
         headerView.configureWith(result: resultsViewModel.results[section])
         return headerView
+    }
+}
+
+extension ProviderResultsViewController: SortPickerViewDelegate {
+    func dismissedWith(sortValue: SortValue, sortType: SortType) {
+        switch sortValue {
+        case .company:
+            resultsViewModel.sortCompanyName(sort: sortType, completion: { [weak self] in
+                self?.tableView.reloadData()
+            })
+        case .distance:
+            resultsViewModel.sortDistance(sort: sortType, completion: { [weak self] in
+                self?.tableView.reloadData()
+            })
+        case .price:
+            resultsViewModel.sortPrice(sort: sortType, completion: { [weak self] in
+                self?.tableView.reloadData()
+            })
+        }
     }
 }
