@@ -24,9 +24,12 @@ class CarRentalMapViewController: UIViewController {
     private var mapViewModel = CarRentalMapViewModel()
     private let datePickerContainer = DatePickerContainerView()
     private var observations = [NSKeyValueObservation]()
+    private var currentSearchPin = MKPointAnnotation()
+    private var locationLoaded = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.title = "Search"
         LocationService.shared.startLocationServices()
         setupViews()
         view.addSubview(mapView)
@@ -47,7 +50,6 @@ class CarRentalMapViewController: UIViewController {
     private func setupViews() {
         mapView.frame = view.bounds
         mapView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
-        mapView.showsUserLocation = true
 
         searchButton.setTitle(mapViewModel.searchButtonText, for: .normal)
         searchButton.addTarget(self, action: #selector(didTapSearchButton), for: .touchUpInside)
@@ -57,6 +59,10 @@ class CarRentalMapViewController: UIViewController {
         dateButtonContainer.dropOffButton.addTarget(self, action: #selector(didTapDropOffDate), for: .touchUpInside)
 
         datePickerContainer.datePicker.addTarget(self, action: #selector(datePickerDidChange(_:)), for: .valueChanged)
+
+        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(didLongPress(_:)))
+        longPress.minimumPressDuration = 0.5
+        mapView.addGestureRecognizer(longPress)
     }
 
     private func layoutViews() {
@@ -85,8 +91,12 @@ class CarRentalMapViewController: UIViewController {
 
     private func addObservers() {
         let currentLocationObserver = LocationService.shared.observe(\.currentLocation) { [weak self] observed, _ in
-            self?.mapView.setRegion(MKCoordinateRegionMake(observed.currentLocation, MKCoordinateSpanMake(1, 1)), animated: true)
-            
+            if !(self?.locationLoaded)! {
+                self?.mapView.setRegion(MKCoordinateRegionMake(observed.currentLocation, MKCoordinateSpanMake(1, 1)), animated: true)
+                self?.currentSearchPin.coordinate = observed.currentLocation
+                self?.mapView.addAnnotation((self?.currentSearchPin)!)
+                self?.locationLoaded = true
+            }
         }
         observations.append(currentLocationObserver)
     }
@@ -102,8 +112,7 @@ class CarRentalMapViewController: UIViewController {
     }
 
     @objc private func didTapSearchButton() {
-        mapView.removeAnnotations(mapView.annotations)
-        mapViewModel.searchWith(location: mapView.userLocation.coordinate) {[weak self] (error) in
+        mapViewModel.searchWith(location: currentSearchPin.coordinate) {[weak self] (error) in
             if let error = error {
                 self?.displayAlertViewWith(error: error)
             } else if let results = self?.mapViewModel.results {
@@ -128,6 +137,20 @@ class CarRentalMapViewController: UIViewController {
         let confirmationAction = UIAlertAction(title: "OK", style: .default, handler: nil)
         alertViewController.addAction(confirmationAction)
         present(alertViewController, animated: true, completion: nil)
+    }
+
+    @objc func didLongPress(_ recognizer: UILongPressGestureRecognizer) {
+        if recognizer.state == .began {
+            let pointInView = recognizer.location(in: mapView)
+            let coordinates = mapView.convert(pointInView, toCoordinateFrom: mapView)
+            dropPinAtLocation(location: coordinates)
+        }
+    }
+
+    private func dropPinAtLocation(location: CLLocationCoordinate2D) {
+        mapView.removeAnnotations(mapView.annotations)
+        currentSearchPin.coordinate = location
+        mapView.addAnnotation(currentSearchPin)
     }
 }
 

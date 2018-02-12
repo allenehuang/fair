@@ -11,7 +11,7 @@ import CoreLocation
 
 class CarSearchService {
     static let shared = CarSearchService()
-    private let apiKey = "BH0YcvY52j0ee98eMLf9YMoHUjzzqZTi"
+    private let apiKey = ""
     private let host = "api.sandbox.amadeus.com"
     private let scheme = "https"
     private let dateFormatter = DateFormatter()
@@ -37,17 +37,9 @@ class CarSearchService {
 
         URLSession.shared.dataTask(with: components.url!) { data, response, error in
             if let data = data {
-                let jsonRepresentation = try! JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.allowFragments)
-                print(jsonRepresentation)
+//                let jsonRepresentation = try! JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.allowFragments)
+//                print(jsonRepresentation)
                 do {
-                    /*
-                     {
-                     message = "An unexpected server error occured. Try again in a few minutes, maybe it will work. Otherwise, contact support with this response message";
-                     "more_info" = "A java.lang.RuntimeException occurred at system time 1518236173932";
-                     status = 500;
-                     }
-                     */
-                    // if status is 200 else show the message
                     let decoder = JSONDecoder()
                     var results = try decoder.decode(RentalCarSearchResults.self, from: data)
                     DispatchQueue.main.async {

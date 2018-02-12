@@ -33,7 +33,7 @@ class CarRentalMapViewModel: NSObject {
     var results = [Result]()
 
     func searchWith(location: CLLocationCoordinate2D, completion: @escaping (Error?) -> ()) {
-        CarSearchService.shared.search(location: location, radius: 42, pickUpDate: pickUpDate, dropOffDate: dropOffDate) { [weak self] (results, error) in
+        CarSearchService.shared.search(location: location, radius: 70, pickUpDate: pickUpDate, dropOffDate: dropOffDate) { [weak self] (results, error) in
             if let results = results {
                 self?.results = results
             }

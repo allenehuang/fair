@@ -21,6 +21,7 @@ class ProviderResultsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.title = "Results"
         sortPickerView.delegate = self
         tableView.dataSource = self
         tableView.delegate = self

@@ -21,4 +21,17 @@ class MapPreviewService {
         self.mapSnapshotOptions.showsBuildings = true
         self.mapSnapshotOptions.showsPointsOfInterest = false
     }
+
+    func createImageFor(coordinate: CLLocationCoordinate2D, size: CGSize, completion: @escaping (UIImage)->()) {
+        mapSnapshotOptions.region = MKCoordinateRegionMakeWithDistance(coordinate, regionalDistance, regionalDistance)
+        mapSnapshotOptions.size = size
+
+        let snapShotter = MKMapSnapshotter(options: mapSnapshotOptions)
+        snapShotter.start { (snapshot: MKMapSnapshot?, error: Error?) in
+            guard let mapPreview = snapshot?.image else { return }
+            DispatchQueue.main.async {
+                completion(mapPreview)
+            }
+        }
+    }
 }

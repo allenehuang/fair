@@ -76,7 +76,7 @@
       <AdditionalOptions>
       </AdditionalOptions>
       <LocationScenarioReference
-         identifier = "../../fair/nevada.gpx"
+         identifier = "../../fair/west_hollywood.gpx"
          referenceType = "0">
       </LocationScenarioReference>
    </LaunchAction>

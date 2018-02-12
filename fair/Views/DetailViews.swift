@@ -133,3 +133,43 @@ class DetailViewHeaderLabel: UILabel {
         fatalError("init(coder:) has not been implemented")
     }
 }
+
+class MapPreviewImage: UIView {
+    private let activityIndicator = UIActivityIndicatorView()
+    private let imageView = UIImageView()
+
+    convenience init() {
+        self.init(frame: .zero)
+        activityIndicator.startAnimating()
+        activityIndicator.hidesWhenStopped = true
+        addSubviewsForAutolayout(imageView, activityIndicator)
+        layoutViews()
+    }
+
+    private func layoutViews() {
+        let views: [String: Any] = [
+            "activityIndicator": activityIndicator,
+            "imageView": imageView
+        ]
+
+        addConstraints(
+            NSLayoutConstraint.constraints(withVisualFormat: "H:|[imageView]|", options: [], metrics: nil, views: views),
+            NSLayoutConstraint.constraints(withVisualFormat: "V:|[imageView]|", options: [], metrics: nil, views: views),
+            NSLayoutConstraint.constraints(withVisualFormat: "H:|[activityIndicator]|", options: [], metrics: nil, views: views),
+            NSLayoutConstraint.constraints(withVisualFormat: "V:|[activityIndicator]|", options: [], metrics: nil, views: views)
+        )
+    }
+
+    func setImage(_ image: UIImage) {
+        imageView.image = image
+        activityIndicator.stopAnimating()
+    }
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
